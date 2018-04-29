@@ -67,6 +67,7 @@ Route::group(['middleware' => ['auth','admin']], function () {
     Route::get('/admin/item/sort/{id}','ItemController@sort')->name('item.sort');
     Route::resource('/admin/item', 'ItemController');
 
+    /*
     Route::get('/admin/migrate/prices', function() {
 
         $collections= \App\Item::all();
@@ -85,6 +86,7 @@ Route::group(['middleware' => ['auth','admin']], function () {
 
 
     });
+    */
 
 });
 
