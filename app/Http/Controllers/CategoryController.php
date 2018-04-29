@@ -17,7 +17,7 @@ class CategoryController extends Controller
     {
         //
 
-        $categories = Category::OrderBy('position')->paginate(10);
+        $categories = Category::OrderBy('position', 'asc')->paginate(10);
 
         return view('admin.category.index', compact('categories'));
     }
@@ -39,7 +39,9 @@ class CategoryController extends Controller
     public function create()
     {
         //
-        return view('admin.category.create');
+        $categories = Category::pluck('name','id')->all();
+
+        return view('admin.category.create', compact('categories'));
     }
 
     /**
@@ -65,7 +67,8 @@ class CategoryController extends Controller
         $category = Category::create([
            'name'=>$request->name,
             'name_en'=>$request->name_en,
-            'name_ru'=>$request->name_ru
+            'name_ru'=>$request->name_ru,
+            'parent_id'=>$request->parent_id
         ]);
 
         if($request->hasfile('path'))
@@ -106,8 +109,9 @@ class CategoryController extends Controller
     {
         //
         $category = Category::find($id);
+        $categories = Category::pluck('name','id')->all();
 
-        return view('admin.category.edit', compact('category'));
+        return view('admin.category.edit', compact('category', 'categories'));
     }
 
     /**
@@ -136,7 +140,8 @@ class CategoryController extends Controller
         $category->update([
             'name'=>$request->name,
             'name_en'=>$request->name_en,
-            'name_ru'=>$request->name_ru
+            'name_ru'=>$request->name_ru,
+            'parent_id'=>$request->parent_id
         ]);
 
         if($request->hasfile('path'))
@@ -172,17 +177,23 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         //
-        $category = Category::find($id);
+        $category = Category::findorfail($id);
 
-        foreach ($category->images as $image) {
-            unlink(public_path(). '/images/' . $image->name);
+        if ((count($category->items)<1) && (count($category->childs)<1)) {
+
+            foreach ($category->images as $image) {
+                unlink(public_path() . '/images/' . $image->name);
+            }
+
+            $category->images()->delete();
+
+            $category->delete();
+
+            Session::flash('notification', 'Deleted !');
         }
-
-        $category->images()->delete();
-
-        $category->delete();
-
-        Session::flash('notification', 'Deleted !');
+        else {
+            Session::flash('notification_danger', 'There are items or child categories related to this category. You can delete only empty categories !');
+        }
 
         return redirect(route('category.index'));
     }

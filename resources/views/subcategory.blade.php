@@ -27,15 +27,12 @@
 
                                     @endphp
                                 </p>
-                                <img class="img img-fluid img-responsive img-thumbnail" src="images/{{isset($category->images->first()->name) ? $category->images->first()->name : ''}}">
+                                <img class="img img-fluid img-responsive img-thumbnail" src="/images/{{isset($category->images->first()->name) ? $category->images->first()->name : ''}}">
                             </a>
                         </div>
                     @endforeach
                 </div>
             @endforeach
-
-
-
 
 
         @endif

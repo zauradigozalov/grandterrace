@@ -25,6 +25,8 @@
 
     @include('layouts.session')
 
+    @include('layouts.session_danger')
+
     @include('layouts.form_errors')
 
 
@@ -55,7 +57,7 @@
 
 
                                     </td>
-                                    <td>{{$category->name}}</td>
+                                    <td>{!! ($category->parent_id>0) ? $category->parents->first()->name . ' <i class="fa fa-long-arrow-right"></i> ' . $category->name : $category->name !!}</td>
                                     <td>{{$category->created_at->diffforHumans()}}</td>
                                     <td>{{$category->updated_at->diffforHumans()}}</td>
                                     <td>
@@ -130,7 +132,7 @@
         $(document).ready(function () {
             setTimeout(function() {
                 $('.alert-dismissible').remove();
-            },2000);
+            },5000);
         });
 
 

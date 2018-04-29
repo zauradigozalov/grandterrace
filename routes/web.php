@@ -92,7 +92,7 @@ Route::group(['middleware' => ['auth','admin']], function () {
 
 Route::get('/', function () {
 
-    $categories = \App\Category::orderBy('position', 'asc')->get();
+    $categories = \App\Category::whereParentId(0)->orderBy('position', 'asc')->get();
 
     return view('welcome', compact('categories'));
 
@@ -103,20 +103,36 @@ Route::get('/{locale}', function ($locale) {
 
     App::setLocale($locale);
 
-    $categories = \App\Category::orderBy('position', 'asc')->get();
+    $categories = \App\Category::whereParentId(0)->orderBy('position', 'asc')->get();
 
     return view('welcome', compact('categories'));
 
-
 });
+
+
+
 
 Route::get('/{locale}/cat/{id}', function ($locale, $id) {
 
     App::setLocale($locale);
 
-    $items = \App\Item::where('category_id', '=', $id)->orderBy('position', 'asc')->get();
 
-    return view('category', compact('items'));
+    $category = \App\Category::findorfail($id);
+
+
+
+    if (count($category->childs)>0) {
+
+        $categories = \App\Category::findorfail($id)->childs()->orderBy('position', 'asc')->get();
+
+        return view('subcategory', compact('categories'));
+    }
+    else {
+
+        $items = \App\Item::where('category_id', '=', $id)->orderBy('position', 'asc')->get();
+
+        return view('category', compact('items', 'category'));
+    }
 
 
 });

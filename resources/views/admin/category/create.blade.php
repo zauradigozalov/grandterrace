@@ -80,6 +80,22 @@
                 </div>
             </div>
 
+            <div class="row col-xs-12">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Parent Category</h3>
+                    </div>
+                    <div class="box-body">
+                        <div class="form-group {{ $errors->first('parent_id') ? 'has-error' : '' }}">
+                            {!! Form::label('parent_id', 'Parent Category: ') !!}
+                            {!! Form::select('parent_id', array('0'=>'-- This is main category --') + $categories, null, ['class'=>'form-control']) !!}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
 
             <div class="row col-xs-12">
                 <div class="box box-primary">
