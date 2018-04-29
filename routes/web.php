@@ -133,6 +133,7 @@ Route::get('/{locale}/cat/{id}', function ($locale, $id) {
         $items = \App\Item::where('category_id', '=', $id)->orderBy('position', 'asc')->get();
 
         return view('category', compact('items', 'category'));
+
     }
 
 

@@ -49,7 +49,7 @@
                                 <tr>
                                     <td>{{$item->id}}</td>
                                     <td>{{$item->name}}</td>
-                                    <td><span class="label label-danger">{{$item->category->name}}</span></td>
+                                    <td><a href="{{route('item.sort', $item->category->id)}}"><span class="label label-danger">{{$item->category->name}}</span></a></td>
                                     <td>
                                         @foreach(array_filter(unserialize($item->prices()->first()->price)) as $price)
                                         {{$price}} ‎₼ <br>

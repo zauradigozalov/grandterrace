@@ -162,6 +162,16 @@ HTML;
 
 
 
+    @else
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <h2 style="font-weight: 400;">
+                    {{__('strings.empty_items')}}
+                </h2>
+            </div>
+        </div>
 
 
     @endif

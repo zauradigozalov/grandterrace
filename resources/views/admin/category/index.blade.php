@@ -39,7 +39,7 @@
                     <table class="table table-hover">
 
                         <tr>
-                            <th>Sort items</th>
+                            <th>#</th>
                             <th>Name</th>
                             <th>Created at</th>
                             <th>Updated at</th>
@@ -53,11 +53,15 @@
 
                                     <td width="48px">
 
-                                        <a href="{{route('item.sort', $category->id)}}" title="Sort items related to this category" class="text-light-blue"><i class="fa fa-reorder"></i></a>
+                                        <a href="{{route('item.sort', $category->id)}}" title="Sort, edit, delete items related to this category" class="text-light-blue"><i class="fa fa-reorder"></i></a>
 
 
                                     </td>
-                                    <td>{!! ($category->parent_id>0) ? $category->parents->first()->name . ' <i class="fa fa-long-arrow-right"></i> ' . $category->name : $category->name !!}</td>
+                                    <td>
+
+                                        {!! ($category->parent_id>0) ? '<span style="color:#d2d6de;">' . $category->parents->first()->name . '</span> <i class="fa fa-long-arrow-right"></i> ' . $category->name : $category->name !!}
+
+                                    </td>
                                     <td>{{$category->created_at->diffforHumans()}}</td>
                                     <td>{{$category->updated_at->diffforHumans()}}</td>
                                     <td>
@@ -133,7 +137,9 @@
             setTimeout(function() {
                 $('.alert-dismissible').remove();
             },5000);
+
         });
+
 
 
     </script>

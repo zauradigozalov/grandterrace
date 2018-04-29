@@ -3,7 +3,7 @@
 @section('title', 'Sort Items')
 
 @section('content_header')
-    <h1>Items <small>SORT MENU ITEMS</small></h1>
+    <h1>Items <small>SORT, EDIT, DELETE MENU ITEMS</small></h1>
     <br>
     <div class="row">
         <div class="col-xs-12">
@@ -48,7 +48,12 @@
                                     <td><span class="fa fa-sort"></span></td>
                                     <td>{{$item->name}}</td>
                                     <td><span class="label label-danger">{{$item->category->name}}</span></td>
-                                    <td>{{$item->price}} ‎₼</td>
+                                    <td>
+                                        @foreach(array_filter(unserialize($item->prices()->first()->price)) as $price)
+                                            {{$price}} ‎₼ <br>
+                                        @endforeach
+                                    </td>
+
 
                                     <td>{{$item->created_at->diffforHumans()}}</td>
                                     <td>{{$item->updated_at->diffforHumans()}}</td>
