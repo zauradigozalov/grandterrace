@@ -1,0 +1,20 @@
+@font-face {
+  font-family: 'DessertScript';
+  src: url('../fonts/Giger.otf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face{
+  font-family:jisaznregular;
+  src:url(../fonts/jaznr.eot);
+  src:url(../fonts/jaznr.eot?#iefix) format('embedded-opentype'),
+  url(../fonts/jaznr.woff) format('woff'),
+  url(../fonts/jaznr.ttf) format('truetype'),
+  url(../fonts/jaznr.svg#jaznr) format('svg');
+    font-weight:400;font-style:normal
+}
+
+span.valyuta{
+  font-family:jisaznregular;
+}
