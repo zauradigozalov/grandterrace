@@ -135,7 +135,7 @@
         $(document).ready(function () {
             setTimeout(function() {
                 $('.alert-dismissible').remove();
-            },2000);
+            },5000);
         });
 
 
