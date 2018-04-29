@@ -125,7 +125,8 @@ Route::get('/{locale}/cat/{id}', function ($locale, $id) {
 
         $categories = \App\Category::findorfail($id)->childs()->orderBy('position', 'asc')->get();
 
-        return view('subcategory', compact('categories'));
+
+        return view('subcategory', compact('categories', 'category'));
     }
     else {
 

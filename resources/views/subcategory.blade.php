@@ -10,6 +10,25 @@
                 $locale = Illuminate\Support\Facades\App::getLocale();
             @endphp
 
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 style="font-weight: 400;">
+
+                        @php
+
+                            if ( $locale == "az" )
+                                echo $category->name;
+                            else if ( $locale == "ru" )
+                                echo $category->name_ru;
+                             else if ( $locale == "en" )
+                                echo $category->name_en;
+
+                        @endphp
+
+                    </h1>
+                </div>
+            </div>
+
             @foreach($categories->chunk(3) as $items)
                 <div class="row">
                     @foreach($items as $category)

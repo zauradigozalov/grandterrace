@@ -8,14 +8,34 @@
 
     @if (count($items) > 0)
 
+        @php
+            $locale = Illuminate\Support\Facades\App::getLocale();
+        @endphp
 
+        <div class="row">
+            <div class="col-md-12">
+                <h1 style="font-weight: 400;">
+                    @php
+
+
+                            if ( $locale == "az" )
+                                echo $category->name;
+                            else if ( $locale == "ru" )
+                                echo $category->name_ru;
+                             else if ( $locale == "en" )
+                                echo $category->name_en;
+
+                    @endphp
+                </h1>
+            </div>
+        </div>
 
         @foreach($items->chunk(2) as $data)
             <div class="row">
                 @foreach($data as $item)
 
                     @php
-                        $locale = Illuminate\Support\Facades\App::getLocale();
+
 
 
                         if ( $locale == "az" ) {
