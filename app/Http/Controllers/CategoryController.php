@@ -109,7 +109,7 @@ class CategoryController extends Controller
     {
         //
         $category = Category::find($id);
-        $categories = Category::pluck('name','id')->all();
+        $categories = Category::where('id', '<>', $id)->pluck('name','id')->all();
 
         return view('admin.category.edit', compact('category', 'categories'));
     }
