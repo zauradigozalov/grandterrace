@@ -189,8 +189,15 @@ class ItemController extends Controller
         //
         $item = Item::find($id);
 
+
+
         foreach ($item->images as $image) {
-            unlink(public_path(). '/images/' . $image->name);
+
+            $image_path = public_path(). '/images/' . $image->name;
+
+            if (file_exists($image_path)) {
+                unlink($image_path);
+            }
         }
 
         $item->images()->delete();

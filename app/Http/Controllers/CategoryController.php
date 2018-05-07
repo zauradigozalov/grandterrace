@@ -181,8 +181,14 @@ class CategoryController extends Controller
 
         if ((count($category->items)<1) && (count($category->childs)<1)) {
 
+
             foreach ($category->images as $image) {
-                unlink(public_path() . '/images/' . $image->name);
+
+                $image_path = public_path(). '/images/' . $image->name;
+
+                if (file_exists($image_path)) {
+                    unlink($image_path);
+                }
             }
 
             $category->images()->delete();
