@@ -17,7 +17,7 @@ class ItemController extends Controller
     public function index()
     {
         //
-        $items = Item::OrderBy('position')->paginate(10);
+        $items = Item::OrderBy('position')->get();
 
         return view('admin.item.index', compact('items'));
     }
@@ -193,12 +193,12 @@ class ItemController extends Controller
 
         foreach ($item->images as $image) {
 
-            $image_path = public_path(). '/images/' . $image->name;
+        $image_path = public_path(). '/images/' . $image->name;
 
-            if (file_exists($image_path)) {
-                unlink($image_path);
-            }
+        if (file_exists($image_path)) {
+            unlink($image_path);
         }
+    }
 
         $item->images()->delete();
         $item->prices()->delete();
