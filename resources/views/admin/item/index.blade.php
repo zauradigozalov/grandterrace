@@ -29,9 +29,9 @@
             <div class="box">
 
                 <!-- /.box-header -->
-                <div class="box-body table-responsive no-padding">
-                    <table class="table table-hover">
-
+                <div class="box-body">
+                    <table class="dataTables_wrapper form-inline dt-bootstrap" id="table_id">
+                        <thead>
                         <tr>
                             <th>ID</th>
                             <th>Name</th>
@@ -42,6 +42,7 @@
                             <th>Updated at</th>
                             <th>Actions</th>
                         </tr>
+                        </thead>
                         <tbody>
                         @if(count($items)>0)
 
@@ -125,12 +126,22 @@
         </div>
     </div>
 
-    {{$items->links()}}
 @stop
 
 @section('js')
 
     <script>
+
+        $(document).ready( function () {
+            $('#table_id').DataTable({
+                'paging'      : true,
+                'lengthChange': false,
+                'searching'   : true,
+                'ordering'    : false,
+                'info'        : true,
+                'autoWidth'   : false
+            });
+        } );
 
         $(document).ready(function () {
             setTimeout(function() {
