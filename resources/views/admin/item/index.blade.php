@@ -139,7 +139,9 @@
                 'searching'   : true,
                 'ordering'    : false,
                 'info'        : true,
-                'autoWidth'   : false
+                'autoWidth'   : false,
+                "bProcessing" : true,
+                "bDeferRender": true
             });
         } );
 
