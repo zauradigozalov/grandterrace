@@ -58,6 +58,12 @@
 
                     <ul class="nav navbar-nav">
                         <li>
+                            <a href="{{route('syncmenu.index')}}">
+                                <i class="fa fa-spin fa-refresh"></i> Last sync was {{session('userloggedin_lastsyncdate')}}
+                            </a>
+
+                        </li>
+                        <li>
                                 <a href="/" target="_blank">
                                     <i class="fa fa-fw fa-external-link"></i> Open web view
                                 </a>

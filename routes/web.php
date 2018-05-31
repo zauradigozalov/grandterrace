@@ -67,6 +67,17 @@ Route::group(['middleware' => ['auth','admin']], function () {
     Route::get('/admin/item/sort/{id}','ItemController@sort')->name('item.sort');
     Route::resource('/admin/item', 'ItemController');
 
+
+	Route::get('/admin/syncmenu','SyncMenuController@index')->name('syncmenu.index');
+
+	Route::get('/admin/syncmenu/setdate', function () {
+
+		\App\SyncMenu::create();
+
+
+	});
+
+
     /*
     Route::get('/admin/migrate/prices', function() {
 

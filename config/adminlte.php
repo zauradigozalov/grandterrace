@@ -170,6 +170,18 @@ return [
 
 
         ],
+	    [
+		    'text'        => 'Sync to Website',
+		    'icon'        => 'upload',
+		    'url'  => 'admin/syncmenu',
+		    'icon_color' => 'yellow',
+
+
+	    ],
+
+
+
+
 
         'ACCOUNT SETTINGS',
 

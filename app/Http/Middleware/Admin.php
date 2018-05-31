@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\SyncMenu;
 use Carbon\Carbon;
 use Closure;
 use Illuminate\Support\Facades\Auth;
@@ -28,7 +29,8 @@ class Admin
                 session([
                     'userloggedin_name'=>$user->name,
                     'userloggedin_email'=>$user->email,
-                    'userloggedin_date'=>$user->created_at->diffForHumans()
+                    'userloggedin_date'=>$user->created_at->diffForHumans(),
+                    'userloggedin_lastsyncdate'=>SyncMenu::orderBy('id','desc')->first()->created_at->diffForHumans()
 
                 ]);
 
