@@ -221,7 +221,7 @@ HTML;
         {
             $.ajax({
                 type: "POST",
-                url: "http://grandterrace.test/wp-syncmenu.php",
+                url: "http://grandhotel.controlsystems.az/wp-syncmenu.php",
                 data: {"data_az":$("#data_az").val(), "data_en":$("#data_en").val()},
                 crossDomain:true,
                 beforeSend: function() {
