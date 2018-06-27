@@ -43,6 +43,7 @@
                             <th>Name</th>
                             <th>Created at</th>
                             <th>Updated at</th>
+                            <th>Status</th>
                             <th>Actions</th>
                         </tr>
                         <tbody>
@@ -64,6 +65,7 @@
                                     </td>
                                     <td>{{$category->created_at->diffforHumans()}}</td>
                                     <td>{{$category->updated_at->diffforHumans()}}</td>
+                                    <td>{!!html_entity_decode($category->status())!!}</td>
                                     <td>
                                         <div class="btn-group">
 

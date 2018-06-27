@@ -130,6 +130,7 @@ class CategoryController extends Controller
             'name' => 'required|max:255',
             'name_en' => 'required|max:255',
             'name_ru' => 'required|max:255',
+            'status'=>'required|integer',
             'path.*' => 'image|mimes:jpg,jpeg,png,gif|max:2000' //|dimensions:ratio=1/1
         ]);
 
@@ -141,7 +142,8 @@ class CategoryController extends Controller
             'name'=>$request->name,
             'name_en'=>$request->name_en,
             'name_ru'=>$request->name_ru,
-            'parent_id'=>$request->parent_id
+            'parent_id'=>$request->parent_id,
+	        'status'=>$request->status
         ]);
 
         if($request->hasfile('path'))

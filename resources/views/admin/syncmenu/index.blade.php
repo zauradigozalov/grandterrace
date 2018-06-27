@@ -42,7 +42,7 @@
                     <textarea id = "data_az" cols="120" rows="20" style="display:none">
 
                     @foreach($categories->chunk(2) as $categoryAll)
-                    <div class="row">
+                    <div class="row az">
 
                     @foreach($categoryAll as $category)
 
@@ -125,7 +125,7 @@ HTML;
                     <textarea id = "data_en" cols="120" rows="20" style="display:none">
 
                     @foreach($categories->chunk(2) as $categoryAllEN)
-                            <div class="row">
+                            <div class="row en">
 
                     @foreach($categoryAllEN as $category)
 
@@ -223,6 +223,7 @@ HTML;
                 type: "POST",
                 url: "http://grandterrace.test/wp-syncmenu.php",
                 data: {"data_az":$("#data_az").val(), "data_en":$("#data_en").val()},
+                crossDomain:true,
                 beforeSend: function() {
                     $("#syncbutton").attr("disabled", "disabled");
                     $("#button_spin").addClass("fa-spin");
@@ -231,22 +232,25 @@ HTML;
                 },
                 error: function(xhr) { // if error occured
                     $("#upload_status").addClass("lead text-red");
-                    $("#upload_status").html("There was an error during upload");
+                    $("#upload_status").html("There was an error during sync");
                 },
                 complete: function() {
                     $("#syncbutton").removeAttr('disabled');
                     $("#button_spin").removeClass("fa-spin");
                 },
                 success: function(msg){
+
+                    $.ajax({
+                        type: "GET",
+                        url: "/admin/syncmenu/setdate"
+                    });
+
                     $("#upload_status").addClass("lead text-muted");
                     $("#upload_status").html(msg);
                 }
             });
 
-            $.ajax({
-                type: "GET",
-                url: "/admin/syncmenu/setdate"
-            });
+
         }
 
     </script>

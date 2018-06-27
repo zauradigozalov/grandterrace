@@ -72,6 +72,8 @@ Route::group(['middleware' => ['auth','admin']], function () {
 
 	Route::get('/admin/syncmenu/setdate', function () {
 
+		\App\SyncMenu::truncate();
+
 		\App\SyncMenu::create();
 
 
@@ -103,7 +105,7 @@ Route::group(['middleware' => ['auth','admin']], function () {
 
 Route::get('/', function () {
 
-    $categories = \App\Category::whereParentId(0)->orderBy('position', 'asc')->get();
+    $categories = \App\Category::whereParentId(0)->where('status', '1')->orderBy('position', 'asc')->get();
 
     return view('welcome', compact('categories'));
 
@@ -114,7 +116,7 @@ Route::get('/{locale}', function ($locale) {
 
     App::setLocale($locale);
 
-    $categories = \App\Category::whereParentId(0)->orderBy('position', 'asc')->get();
+    $categories = \App\Category::whereParentId(0)->where('status', '1')->orderBy('position', 'asc')->get();
 
     return view('welcome', compact('categories'));
 
@@ -131,22 +133,40 @@ Route::get('/{locale}/cat/{id}', function ($locale, $id) {
     $category = \App\Category::findorfail($id);
 
 
+	if ($category->status > 0) {
 
-    if (count($category->childs)>0) {
+		if ( count( $category->childs ) > 0 ) {
 
-        $categories = \App\Category::findorfail($id)->childs()->orderBy('position', 'asc')->get();
+			$categories = \App\Category::findorfail( $id )->childs()->where('status','1')->orderBy( 'position', 'asc' )->get();
 
 
-        return view('subcategory', compact('categories', 'category'));
-    }
-    else {
+			return view( 'subcategory', compact( 'categories', 'category' ) );
 
-        $items = \App\Item::where('category_id', '=', $id)->orderBy('position', 'asc')->get();
+		} else {
 
-        return view('category', compact('items', 'category'));
 
-    }
+			if ($category->status>0) {
 
+				$items = \App\Item::where( 'category_id', '=', $id )->orderBy( 'position', 'asc' )->get();
+
+
+				return view( 'category', compact( 'items', 'category' ) );
+			}
+			else {
+				$category = [];
+				$items = [];
+				return view( 'category', compact( 'items', 'category' ) );
+
+			}
+
+		}
+	}
+	else {
+
+		$categories = [];
+		$items = [];
+		return view( 'category', compact('items', 'categories'));
+	}
 
 });
 

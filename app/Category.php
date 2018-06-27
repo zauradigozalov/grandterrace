@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\App;
 class Category extends Model
 {
     //
-    protected $fillable = ['name', 'name_en', 'name_ru', 'position', 'parent_id'];
+    protected $fillable = ['name', 'name_en', 'name_ru', 'position', 'parent_id', 'status'];
 
     public function images() {
 
@@ -46,5 +46,13 @@ class Category extends Model
         $this->attributes['name_ru'] = trim($this->mb_ucfirst(mb_strtolower($value)));
     }
 
+    public function status() {
+    	if ($this->status > 0) {
+    		return "<span class=\"label label-info\">ACTIVE</span>";
+	    }
+	    else {
+		    return "<span class=\"label label-danger\">DISABLED</span>";
+	    }
+    }
 
 }

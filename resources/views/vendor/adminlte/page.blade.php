@@ -59,7 +59,7 @@
                     <ul class="nav navbar-nav">
                         <li>
                             <a href="{{route('syncmenu.index')}}">
-                                <i class="fa fa-spin fa-refresh"></i> Last sync was {{session('userloggedin_lastsyncdate')}}
+                                <i class="fa fa-spin fa-refresh"></i> Last menu sync was {{session('userloggedin_lastsyncdate')}}
                             </a>
 
                         </li>
